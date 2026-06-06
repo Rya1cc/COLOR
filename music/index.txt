@@ -1,0 +1,19 @@
+# Put your MP3 files here as 1.mp3, 2.mp3, 3.mp3, etc.
+# Format:
+# [Music number] - [Music name] - [Music color]
+#
+# Available colors:
+# Red, Orange, Yellow, Yellow Green, Green, Cyan, Blue, Violet, Pink, Brown, Gray, White
+
+1 - Merry Christmas - Yellow Green
+2 - Blue Hour Walk - Blue
+3 - Velvet Room - Violet
+4 - Warm Window - Orange
+5 - Soft Porcelain - White
+6 - Graphite Rain - Gray
+7 - Rose Magazine - Pink
+8 - Red Carpet - Red
+9 - Deep Forest - Green
+10 - Sea Glass - Cyan
+11 - Amber Street - Yellow
+12 - Coffee Sketchbook - Brown

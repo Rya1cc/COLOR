@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Color Lab — Final</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-apple" data-theme="apple">
+  <div id="clickLayer" aria-hidden="true"></div>
+
+  <main class="app-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Color Lab</p>
+        <h1>Identify colors. Build palettes. Decode visual meaning.</h1>
+        <p class="subtitle">Pick a color, sample from an image, or use the eyedropper. Then read it through five different lenses: art, chemistry, kindergarten, color-blind clarity, and photography.</p>
+      </div>
+
+      <article class="hero-swatch-card glass-card">
+        <div id="bigSwatch" class="big-swatch"></div>
+        <div class="swatch-footer">
+          <strong id="hexBadge">#1471EB</strong>
+          <button type="button" id="copyHexBtn" class="pill-btn" data-click>Copy HEX</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="layout-grid">
+      <aside id="controlsPanel" class="glass-card controls-panel">
+        <div class="section-title">
+          <h2>Choose color</h2>
+          <p>Picker, eyedropper, image sampling, and music.</p>
+        </div>
+
+        <label class="color-picker-row">
+          <span>Color picker</span>
+          <input id="colorInput" type="color" value="#1471EB" data-click />
+        </label>
+
+        <div class="field-grid">
+          <label>
+            <span>HEX</span>
+            <input id="hexInput" type="text" value="#1471EB" maxlength="7" spellcheck="false" />
+          </label>
+          <label>
+            <span>RGB</span>
+            <input id="rgbInput" type="text" value="20, 113, 235" spellcheck="false" />
+          </label>
+        </div>
+
+        <div class="button-grid">
+          <button type="button" id="eyeDropperBtn" class="primary-btn" data-click>Use eyedropper</button>
+          <label class="file-btn" data-click>
+            Upload image
+            <input id="imageUpload" type="file" accept="image/*" />
+          </label>
+        </div>
+
+        <section id="imageSampler" class="image-sampler hidden">
+          <p>Click the image to sample a color.</p>
+          <canvas id="canvas" width="800" height="450"></canvas>
+        </section>
+
+        <section class="music-panel">
+          <div class="music-head">
+            <div>
+              <h3>Color music</h3>
+              <p id="musicMatchText">Matched color family: Blue</p>
+            </div>
+            <button type="button" id="musicToggleBtn" class="round-btn" data-click aria-label="Play color music">▶</button>
+          </div>
+          <div class="music-now">
+            <span class="music-orb"></span>
+            <div>
+              <strong id="musicTitle">2. Blue Hour Walk</strong>
+              <small id="musicHint">Blue · expects music/2.mp3</small>
+            </div>
+          </div>
+          <div class="music-actions">
+            <button type="button" id="musicPrevBtn" class="tiny-btn" data-click>Prev</button>
+            <button type="button" id="musicNextBtn" class="tiny-btn" data-click>Next</button>
+            <button type="button" id="musicReloadBtn" class="tiny-btn" data-click>Reload</button>
+          </div>
+          <audio id="colorAudio" preload="none"></audio>
+        </section>
+      </aside>
+
+      <section class="main-panel glass-card">
+        <nav class="mode-tabs" aria-label="Color interpretation modes">
+          <button type="button" class="mode-tab active" data-mode="art" data-click>Art</button>
+          <button type="button" class="mode-tab" data-mode="chemist" data-click>Chemist</button>
+          <button type="button" class="mode-tab" data-mode="kindergarten" data-click>Kindergarten</button>
+          <button type="button" class="mode-tab" data-mode="colorblind" data-click>Color blind</button>
+          <button type="button" class="mode-tab" data-mode="photographer" data-click>Photographer</button>
+        </nav>
+
+        <section class="result-hero">
+          <p id="modeLabel" class="mode-label">Art mode</p>
+          <h2 id="colorName">Luminous Azure</h2>
+          <p id="colorDescription">A clean, modern blue with a polished digital feel.</p>
+        </section>
+
+        <section class="insight-section">
+          <div class="section-head">
+            <div>
+              <h3 id="modeInsightTitle">Art intelligence</h3>
+              <p id="modeInsightSubtitle">Pigment, material, cultural, and visual-direction clues.</p>
+            </div>
+            <button type="button" id="addCreativeWidgetBtn" class="pill-btn subtle" data-click>Add creative widget</button>
+          </div>
+          <div class="orbit-graphic" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div id="modeInsightGrid" class="insight-grid"></div>
+        </section>
+
+        <section class="theme-studio">
+          <div class="section-head">
+            <div>
+              <h3>Theme studio</h3>
+              <p>These outputs are meant for UI, art direction, and photography mood building.</p>
+            </div>
+            <div class="theme-controls">
+              <div class="theme-tabs" aria-label="Theme style">
+                <button type="button" class="theme-tab active" data-theme="apple" data-click>Apple</button>
+                <button type="button" class="theme-tab" data-theme="soft" data-click>Soft</button>
+                <button type="button" class="theme-tab" data-theme="bold" data-click>Bold</button>
+                <button type="button" class="theme-tab" data-theme="dark" data-click>Dark</button>
+                <button type="button" class="theme-tab" data-theme="minimal" data-click>Minimal</button>
+              </div>
+              <button type="button" id="focusViewBtn" class="pill-btn subtle" data-click>Focus view</button>
+            </div>
+          </div>
+
+          <article class="theme-preview">
+            <div class="preview-top">
+              <span class="preview-dot"></span>
+              <span id="themeTag">Apple theme</span>
+            </div>
+            <h4 id="themeTitle">Blue interface theme</h4>
+            <p id="themeDescription">A polished glassy palette with clean surfaces and a confident accent.</p>
+            <div class="preview-actions">
+              <button type="button" id="primaryTokenBtn" class="primary-btn" data-click>Primary</button>
+              <button type="button" id="secondaryTokenBtn" class="ghost-btn" data-click>Secondary</button>
+              <button type="button" id="copyThemeBtn" class="ghost-btn" data-click>Copy theme</button>
+            </div>
+          </article>
+
+          <div id="themeTokens" class="token-grid"></div>
+        </section>
+
+        <section class="fold-section open" data-fold-section>
+          <button type="button" class="fold-header" data-click aria-expanded="true">
+            <div>
+              <h3>Creative palette</h3>
+              <p>Role-based colors for design, art, presentation, and moodboards.</p>
+            </div>
+            <span class="fold-icon">⌄</span>
+          </button>
+          <div class="fold-content">
+            <div id="creativePalette" class="creative-palette"></div>
+          </div>
+        </section>
+
+        <section class="fold-section open" data-fold-section>
+          <button type="button" class="fold-header" data-click aria-expanded="true">
+            <div>
+              <h3>Photographer studio</h3>
+              <p>Lighting, white balance, subject direction, and a CSS-generated sample mood image.</p>
+            </div>
+            <span class="fold-icon">⌄</span>
+          </button>
+          <div class="fold-content">
+            <div class="photo-grid">
+              <div id="samplePhoto" class="sample-photo">
+                <div class="photo-sky"></div>
+                <div class="photo-sun"></div>
+                <div class="photo-mountains"></div>
+                <div class="photo-ground"></div>
+                <div class="photo-subject"></div>
+                <div class="photo-vignette"></div>
+                <span id="photoTag">Blue-hour editorial cool</span>
+              </div>
+              <article class="photo-brief">
+                <span class="micro-label">Photo direction</span>
+                <h4 id="photoBriefTitle">Blue-hour urban portrait</h4>
+                <p id="photoBriefText">Use the selected color as a cool shadow grade, then balance it with a warm counter-accent.</p>
+                <div class="photo-facts">
+                  <div><span>Lighting</span><strong id="photoLighting">blue-hour side light</strong></div>
+                  <div><span>White balance</span><strong id="photoWB">cool blue hour</strong></div>
+                  <div><span>Best subject</span><strong id="photoSubject">urban portrait</strong></div>
+                  <div><span>Edit move</span><strong id="photoEdit">protect highlights</strong></div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="widget-section">
+          <div class="section-head">
+            <div>
+              <h3>Info widgets</h3>
+              <p>Customize this small Apple-style dashboard.</p>
+            </div>
+            <div class="widget-actions">
+              <button type="button" id="customizeBtn" class="pill-btn" data-click>Customize widgets</button>
+              <button type="button" id="resetWidgetsBtn" class="pill-btn subtle" data-click>Reset</button>
+            </div>
+          </div>
+          <div id="widgetGrid" class="widget-grid"></div>
+          <div id="widgetGallery" class="widget-gallery hidden">
+            <h4>Add a widget</h4>
+            <p>Choose extra information cards.</p>
+            <div id="galleryItems" class="gallery-grid"></div>
+          </div>
+        </section>
+
+        <section class="fold-section open" data-fold-section>
+          <button type="button" class="fold-header" data-click aria-expanded="true">
+            <div>
+              <h3>Nearby tones</h3>
+              <p>Click a chip to use it as the current color.</p>
+            </div>
+            <span class="fold-icon">⌄</span>
+          </button>
+          <div class="fold-content">
+            <div id="nearbyTones" class="nearby-tones"></div>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast">Copied</div>
+  <script src="script.js"></script>
+</body>
+</html>
